@@ -1,8 +1,10 @@
-export default function Dashboard() {
+import SalarySummary from "@/components/SalarySummary";
+
+export default function DashboardPage() {
   return (
-    <main style={{ padding: 40 }}>
+    <main className="page">
       <h1>Dashboard</h1>
-      <p>Overview coming next.</p>
+      <SalarySummary />
     </main>
   );
 }
