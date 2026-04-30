@@ -1,23 +1,10 @@
-"use client";
+import ReportTable from "@/components/ReportTable";
 
-import { useEffect, useState } from "react";
-
-export default function History() {
-  const [data, setData] = useState<any[]>([]);
-
-  useEffect(() => {
-    fetch("/api/reports/list")
-      .then((r) => r.json())
-      .then((d) => setData(d.data));
-  }, []);
-
+export default function ReportHistoryPage() {
   return (
-    <main style={{ padding: 40 }}>
-      <h1>Reports</h1>
-
-      {data.map((r) => (
-        <pre key={r.id}>{r.final_text}</pre>
-      ))}
+    <main className="page">
+      <h1>Report History</h1>
+      <ReportTable />
     </main>
   );
 }
