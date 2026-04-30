@@ -1,16 +1,21 @@
 import Link from "next/link";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <main style={{ padding: 40 }}>
-      <h1>ShiftLog</h1>
+    <main className="page">
+      <section className="hero">
+        <p className="eyebrow">SHIFTLOG V1</p>
+        <h1>Track salary. Build reports. Copy fast.</h1>
+        <p className="muted">
+          A simple worker tool for monthly income tracking, work-day logging,
+          and copy-ready work reports.
+        </p>
 
-      <div style={{ display: "flex", gap: 20, marginTop: 20 }}>
-        <Link href="/dashboard">Dashboard</Link>
-        <Link href="/salary">Salary</Link>
-        <Link href="/reports/new">New Report</Link>
-        <Link href="/reports/history">Reports</Link>
-      </div>
+        <div className="actions">
+          <Link className="btn" href="/dashboard">Open Dashboard</Link>
+          <Link className="btn secondary" href="/reports/new">Create Report</Link>
+        </div>
+      </section>
     </main>
   );
 }
