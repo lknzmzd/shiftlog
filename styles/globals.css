@@ -223,3 +223,440 @@ pre {
     font-size: 38px;
   }
 }
+
+.top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #111;
+  border: 1px solid #333;
+  padding: 12px 16px;
+  border-radius: 10px;
+}
+
+.menu-btn {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+  background: #111;
+  border: 1px solid #333;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.sidebar-wrap {
+  position: fixed;
+  left: -300px;
+  top: 0;
+  transition: 0.3s;
+  z-index: 999;
+}
+
+.sidebar-wrap.open {
+  left: 0;
+}
+
+@media (min-width: 900px) {
+  .menu-btn {
+    display: none;
+  }
+
+  .sidebar-wrap {
+    position: static;
+  }
+}
+
+.price {
+  font-size: 32px;
+  font-weight: 800;
+}
+
+ul {
+  color: #cfcfcf;
+  line-height: 1.8;
+}
+
+.warehouse-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.warehouse-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1200px;
+}
+
+.warehouse-table th,
+.warehouse-table td {
+  border: 1px solid #2a2a2a;
+  padding: 10px;
+  text-align: left;
+  vertical-align: top;
+  font-size: 13px;
+}
+
+.warehouse-table th {
+  background: #111;
+}
+
+/* ShiftLog warehouse legacy UI */
+.warehouse-legacy {
+  min-height: 100vh;
+  background: #0b0c10;
+  color: #eaeaf0;
+  padding-bottom: 72px;
+}
+
+.warehouse-header {
+  padding: 16px 18px;
+  border-bottom: 1px solid #1f2230;
+  background: #0d0f16;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.warehouse-header h1 {
+  font-size: 16px;
+  margin: 0 0 6px 0;
+}
+
+.warehouse-header p,
+.warehouse-muted {
+  margin: 0;
+  opacity: 0.78;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.warehouse-status-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+.warehouse-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #3a3f57;
+  display: inline-block;
+}
+
+.warehouse-dot.ok {
+  background: #1f6b44;
+}
+
+.warehouse-grid-three {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr 1fr;
+  gap: 12px;
+  padding: 12px;
+  align-items: start;
+}
+
+.warehouse-card {
+  border: 1px solid #1f2230;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0d0f16;
+  min-width: 0;
+}
+
+.warehouse-card h2 {
+  font-size: 13px;
+  margin: 0;
+  padding: 10px 12px;
+  border-bottom: 1px solid #1f2230;
+  opacity: 0.9;
+}
+
+.warehouse-card-body {
+  padding: 12px;
+}
+
+.warehouse-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.warehouse-row > * {
+  flex: 1;
+  min-width: 150px;
+}
+
+.warehouse-row label span {
+  display: block;
+  font-size: 12px;
+  opacity: 0.75;
+  margin-bottom: 6px;
+}
+
+.warehouse-row .wide {
+  flex: 2;
+  min-width: 240px;
+}
+
+.warehouse-legacy textarea,
+.warehouse-legacy input,
+.warehouse-legacy select {
+  width: 100%;
+  background: #0b0c10;
+  color: #eaeaf0;
+  border: 1px solid #262a3b;
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 13px;
+}
+
+.warehouse-legacy textarea:focus,
+.warehouse-legacy input:focus {
+  outline: 2px solid #2e3aa0;
+  outline-offset: 2px;
+}
+
+.warehouse-textarea {
+  min-height: 280px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 12px;
+  line-height: 1.35;
+  resize: vertical;
+}
+
+.warehouse-output {
+  min-height: 420px;
+}
+
+.warehouse-btns {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.warehouse-btns .btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.warehouse-issue-box {
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin: 12px 0;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.warehouse-issue-box.warn {
+  border: 1px solid #7a5d1d;
+  background: #261f12;
+  color: #ffd37a;
+}
+
+.warehouse-issue-box.error {
+  border: 1px solid #8a2e2e;
+  background: #2b1515;
+  color: #ffb0b0;
+}
+
+.warehouse-review,
+.warehouse-edit-panel,
+.warehouse-template-box,
+.warehouse-advanced-list {
+  border: 1px solid #1f2230;
+  border-radius: 12px;
+  background: #0b0c10;
+  margin-top: 12px;
+  overflow: hidden;
+}
+
+.warehouse-review-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border-bottom: 1px solid #1f2230;
+  font-size: 12px;
+}
+
+.warehouse-review-list {
+  max-height: 310px;
+  overflow: auto;
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.warehouse-review-item {
+  text-align: left;
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  background: #121525;
+  border: 1px solid #2a2f44;
+  color: #eaeaf0;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.warehouse-review-item.active {
+  border-color: #4e63ff;
+  background: #17204d;
+}
+
+.warehouse-review-item span,
+.warehouse-review-item small,
+.warehouse-review-item em {
+  font-size: 12px;
+  opacity: 0.82;
+}
+
+.warehouse-review-item em {
+  color: #ffd37a;
+}
+
+.warehouse-edit-panel {
+  padding-bottom: 12px;
+}
+
+.warehouse-edit-panel .warehouse-row {
+  padding: 0 12px;
+  margin-top: 10px;
+}
+
+.warehouse-operator-box {
+  margin: 12px;
+  padding: 10px;
+  border: 1px solid #262a3b;
+  border-radius: 10px;
+  background: #08090d;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 12px;
+  line-height: 1.45;
+  color: #d8d8e2;
+}
+
+.warehouse-template-box {
+  padding: 12px;
+}
+
+.warehouse-template-box h3,
+.warehouse-advanced-list h3 {
+  margin: 0 0 8px;
+  font-size: 13px;
+}
+
+.warehouse-template-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+  max-height: 260px;
+  overflow: auto;
+}
+
+.warehouse-template-card {
+  display: grid;
+  gap: 4px;
+  text-align: left;
+  border: 1px solid #2a2f44;
+  background: #121525;
+  color: #eaeaf0;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.warehouse-template-card:hover,
+.warehouse-review-item:hover {
+  transform: translateY(-1px);
+}
+
+.warehouse-template-card span,
+.warehouse-template-card small {
+  opacity: 0.78;
+  font-size: 12px;
+}
+
+.warehouse-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.warehouse-stats-grid div {
+  border: 1px solid #262a3b;
+  border-radius: 12px;
+  background: #0b0c10;
+  padding: 12px;
+}
+
+.warehouse-stats-grid span {
+  display: block;
+  font-size: 12px;
+  opacity: 0.7;
+  margin-bottom: 6px;
+}
+
+.warehouse-stats-grid b {
+  font-size: 22px;
+}
+
+.warehouse-advanced-list {
+  padding: 12px;
+  margin-top: 10px;
+}
+
+.warehouse-advanced-list > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  border-top: 1px solid #1f2230;
+  padding: 8px 0;
+  font-size: 12px;
+}
+
+@media (max-width: 1200px) {
+  .warehouse-grid-three {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .warehouse-header {
+    position: relative;
+    flex-direction: column;
+  }
+
+  .warehouse-grid-three {
+    padding: 8px;
+  }
+
+  .warehouse-output,
+  .warehouse-textarea {
+    min-height: 220px;
+  }
+}

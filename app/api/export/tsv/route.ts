@@ -1,9 +1,17 @@
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { requireUser } from "@/lib/supabaseServer";
 
 export async function GET() {
+  const { user } = await requireUser();
+
+  if (!user) {
+    return new Response("Unauthorized", { status: 401 });
+  }
+
   const { data, error } = await supabaseAdmin
     .from("reports")
     .select("*")
+    .eq("user_id", user.id)
     .order("created_at", { ascending: false });
 
   if (error) {

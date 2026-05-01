@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function WorkDayForm() {
+export default function WorkplaceForm() {
   const [status, setStatus] = useState("");
 
   async function save(e: React.FormEvent<HTMLFormElement>) {
@@ -11,13 +11,13 @@ export default function WorkDayForm() {
 
     const form = new FormData(e.currentTarget);
 
-    const res = await fetch("/api/work-days/create", {
+    const res = await fetch("/api/workplaces/create", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
-        workDate: form.get("workDate"),
-        hoursWorked: Number(form.get("hoursWorked")),
-        note: form.get("note"),
+        name: String(form.get("name") || ""),
       }),
     });
 
@@ -29,18 +29,18 @@ export default function WorkDayForm() {
     }
 
     e.currentTarget.reset();
-    setStatus("Saved");
+    setStatus("Workplace saved");
   }
 
   return (
     <form onSubmit={save} className="panel">
-      <h2>Add Work Day</h2>
+      <h2>Add Workplace</h2>
 
-      <input name="workDate" type="date" required />
-      <input name="hoursWorked" type="number" step="0.01" placeholder="Hours worked" required />
-      <textarea name="note" placeholder="Note" />
+      <input name="name" placeholder="Workplace name" required />
 
-      <button className="btn" type="submit">Save Work Day</button>
+      <button className="btn" type="submit">
+        Save Workplace
+      </button>
 
       {status && <p className="muted">{status}</p>}
     </form>

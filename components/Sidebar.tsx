@@ -5,10 +5,19 @@ const links = [
   { href: "/dashboard", label: "Dashboard" },
   { href: "/salary", label: "Salary" },
   { href: "/work-days", label: "Work Days" },
+  { href: "/expenses", label: "Expenses" },
+  { href: "/workplaces", label: "Workplaces" },
   { href: "/reports/new", label: "New Report" },
   { href: "/reports/history", label: "History" },
   { href: "/templates", label: "Templates" },
   { href: "/settings", label: "Settings" },
+  { href: "/login", label: "Login" },
+  { href: "/signup", label: "Sign Up" },
+  { href: "/onboarding", label: "Onboarding" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/feedback", label: "Feedback" },
+  { href: "/warehouse", label: "Warehouse" },
+  { href: "/warehouse/history", label: "Warehouse History" },
 ];
 
 export default function Sidebar() {

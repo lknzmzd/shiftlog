@@ -6,7 +6,7 @@ import { ReportTemplate } from "@/lib/types";
 export default function TemplatePicker({
   onSelect,
 }: {
-  onSelect: (template: ReportTemplate) => void;
+  onSelect?: (template: ReportTemplate) => void;
 }) {
   const [templates, setTemplates] = useState<ReportTemplate[]>([]);
   const [query, setQuery] = useState("");
@@ -39,7 +39,7 @@ export default function TemplatePicker({
             key={template.id}
             type="button"
             className="template-card"
-            onClick={() => onSelect(template)}
+            onClick={() => onSelect?.(template)}
           >
             <strong>{template.title}</strong>
             <span>Used {template.usage_count} times</span>

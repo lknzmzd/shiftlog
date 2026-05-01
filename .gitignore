@@ -1,0 +1,18 @@
+@'
+.env
+.env.local
+.env.*.local
+
+node_modules/
+.next/
+out/
+dist/
+
+_imports/
+*.zip
+
+shiftlog/
+warehouse-incident-reporter/
+
+.DS_Store
+'@ | Set-Content -Encoding UTF8 .gitignore
