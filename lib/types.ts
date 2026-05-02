@@ -26,3 +26,21 @@ export type WorkDay = {
   note: string | null;
   created_at: string;
 };
+
+export type IncidentInput = {
+  deviceNo?: string;
+  deviceType?: string;
+  issueText: string;
+  shift?: string;
+  createdBy?: string;
+};
+
+export type ParsedIncident = {
+  deviceNo: string;
+  deviceType: string;
+  issueText: string;
+  issueType: string;
+  quickReason: string;
+  shift: string;
+  createdBy: string;
+};

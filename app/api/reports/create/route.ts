@@ -3,60 +3,24 @@ import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { requireUser } from "@/lib/supabaseServer";
 import { buildReport } from "@/lib/reportBuilder";
 
+function nullableUuid(value: unknown) {
+  if (!value) return null;
+  const text = String(value).trim();
+  return text.length ? text : null;
+}
+
 export async function POST(req: Request) {
   const { user, error: authError } = await requireUser();
 
   if (!user) {
     return NextResponse.json(
-      { success: false, error: authError },
+      { success: false, error: authError || "Unauthorized" },
       { status: 401 }
     );
   }
 
   try {
     const body = await req.json();
-
-    let { data: sub, error: subError } = await supabaseAdmin
-      .from("user_subscriptions")
-      .select("*")
-      .eq("user_id", user.id)
-      .maybeSingle();
-
-    if (subError) {
-      return NextResponse.json(
-        { success: false, error: subError.message },
-        { status: 500 }
-      );
-    }
-
-    if (!sub) {
-      const { data: createdSub, error: createSubError } = await supabaseAdmin
-        .from("user_subscriptions")
-        .insert({
-          user_id: user.id,
-          plan: "free",
-          reports_limit: 10,
-          reports_used: 0,
-        })
-        .select()
-        .single();
-
-      if (createSubError) {
-        return NextResponse.json(
-          { success: false, error: createSubError.message },
-          { status: 500 }
-        );
-      }
-
-      sub = createdSub;
-    }
-
-    if (sub.plan === "free" && sub.reports_used >= sub.reports_limit) {
-      return NextResponse.json(
-        { success: false, error: "Limit reached. Upgrade to Pro." },
-        { status: 403 }
-      );
-    }
 
     const finalText = buildReport(body.templateText, {
       deviceNo: body.deviceNo || "",
@@ -65,45 +29,38 @@ export async function POST(req: Request) {
       photoUrl: body.photoUrl || "",
     });
 
-    const { data, error } = await supabaseAdmin
-      .from("reports")
-      .insert({
-        user_id: user.id,
-        workplace_id: body.workplaceId || null,
-        template_id: body.templateId || null,
-        device_no: body.deviceNo || null,
-        issue_type: body.issueType || null,
-        note: body.note || null,
-        photo_url: body.photoUrl || null,
-        final_text: finalText,
-      })
-      .select()
-      .single();
-
-    if (error) {
+    if (!finalText) {
       return NextResponse.json(
-        { success: false, error: error.message },
-        { status: 500 }
+        { success: false, error: "Report text is empty." },
+        { status: 400 }
       );
     }
 
-    await supabaseAdmin
-      .from("user_subscriptions")
-      .update({
-        reports_used: Number(sub.reports_used || 0) + 1,
-      })
-      .eq("user_id", user.id);
+    const { data, error } = await supabaseAdmin.rpc("create_report_with_quota", {
+      p_user_id: user.id,
+      p_workplace_id: nullableUuid(body.workplaceId),
+      p_template_id: nullableUuid(body.templateId),
+      p_device_no: body.deviceNo || null,
+      p_issue_type: body.issueType || null,
+      p_note: body.note || null,
+      p_photo_url: body.photoUrl || null,
+      p_final_text: finalText,
+    });
 
-    if (body.templateId) {
-      await supabaseAdmin.rpc("increment_template_usage", {
-        template_uuid: body.templateId,
-      });
+    if (error) {
+      const message = error.message || "Could not create report.";
+      const status = message.toLowerCase().includes("limit reached") ? 403 : 500;
+
+      return NextResponse.json(
+        { success: false, error: message },
+        { status }
+      );
     }
 
     return NextResponse.json({ success: true, data, report: data });
-  } catch {
+  } catch (err: any) {
     return NextResponse.json(
-      { success: false, error: "Invalid report request" },
+      { success: false, error: err?.message || "Invalid report request" },
       { status: 400 }
     );
   }
