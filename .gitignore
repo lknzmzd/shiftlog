@@ -16,3 +16,4 @@ warehouse-incident-reporter/
 
 .DS_Store
 '@ | Set-Content -Encoding UTF8 .gitignore
+tsconfig.tsbuildinfo
